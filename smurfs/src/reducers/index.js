@@ -28,12 +28,14 @@ import {
   UPDATE_SMURF,
   GET_SMURFS,
   ACTION_SUCCESS,
-  ACTION_FAILURE
+  ACTION_FAILURE,
+  EDIT_SMURF
 } from "../actions";
 
 const initialState = {
   smurfs: [],
   isFetching: false,
+  isUpdating: false,
   success: false,
   failure: false,
   errors: null
@@ -56,6 +58,7 @@ export const reducer = (state = initialState, action) => {
         success: true,
         failure: false,
         errors: null,
+        isUpdating: false,
         smurfs: action.payload
       };
     case ACTION_FAILURE:
@@ -66,6 +69,33 @@ export const reducer = (state = initialState, action) => {
         failure: true,
         errors: action.payload
       };
+    case ADD_SMURF:
+      return {
+        ...state,
+        isFetching: true,
+        success: false,
+        failure: false,
+        errors: null
+      }
+    case EDIT_SMURF:
+      return {
+        ...state,
+        isUpdating: true
+      }
+    case UPDATE_SMURF:
+      return {
+        ...state,
+        isFetching: true,
+        isUpdating: false,
+        success: false,
+        failure: false,
+        errors: null
+      }
+    case DELETE_SMURF:
+      return {
+        ...state,
+        isFetching: true
+      }
     default:
       return state;
   }

@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { reducer } from "./reducers";
 import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { SmurfForm } from "./components/FormComponent";
+import SmurfForm from "./components/FormComponent";
 import { NavBar } from "./components/NavComponent";
 const store = createStore(
   reducer, // this is the most basic reducer. A function that returns and object. Replace it.
@@ -23,6 +23,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/form" component={SmurfForm} />
+        <Route path="/smurf/:id" component={SmurfForm} />
       </Switch>
     </Router>
   </Provider>,

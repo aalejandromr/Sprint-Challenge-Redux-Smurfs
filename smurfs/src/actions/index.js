@@ -22,11 +22,16 @@ export const UPDATE_SMURF = "UPDATE_SMURF";
 export const DELETE_SMURF = "DELETE_SMURF";
 export const ACTION_SUCCESS = "ACTION_SUCCESS";
 export const ACTION_FAILURE = "ACTION_FAILURE";
+export const EDIT_SMURF = "EDIT_SMURF";
 
 const api = "https://reeiy.sse.codesandbox.io";
 
 export const addSmurf = smurf => dispatch => {
   dispatch({ type: ADD_SMURF });
+  return axios.post(`${api}/smurfs`, smurf).then(res => {
+    dispatch({ type: ACTION_SUCCESS, payload: res.data });
+    return true;
+  }).catch(err => console.log(err));
 };
 
 export const getSmurfs = () => dispatch => {
@@ -34,12 +39,31 @@ export const getSmurfs = () => dispatch => {
   return axios
     .get(`${api}/smurfs`)
     .then(res => {
-      console.log(res);
       setTimeout(() => {
         dispatch({ type: ACTION_SUCCESS, payload: res.data });
-      }, 2000);
+      }, 1000);
     })
     .catch(err => {
       console.log(err);
     });
 };
+
+export const updateSmurf = (id, smurf) => dispatch => {
+  dispatch({ type: UPDATE_SMURF });
+  return axios.put(`${api}/smurfs/${id}`, smurf).then(res => {
+    dispatch({ type: ACTION_SUCCESS, payload: res.data });
+    return true;
+  }).catch(err => console.log(err));
+}
+
+export const editSmurf = () => dispatch => {
+  dispatch({ type: EDIT_SMURF });
+}
+
+export const deleteSmurf = id => dispatch => {
+  dispatch({ type: DELETE_SMURF });
+  return axios.delete(`${api}/smurfs/${id}`).then(res => {
+    dispatch({ type: ACTION_SUCCESS, payload: res.data })
+    return true;
+  }).catch(err => console.log(err));
+}

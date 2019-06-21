@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getSmurfs } from "../../actions";
 import { AppLoader } from "../Utils/Loader";
-import { Smurf } from "./Smurf";
+import Smurf from "./Smurf";
 
 class SmurfList extends React.Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class SmurfList extends React.Component {
     return (
       <div>
         {this.props.smurfs.map(smurf => (
-          <Smurf smurf={smurf} />
+          <Smurf smurf={smurf} key={smurf.id} />
         ))}
       </div>
     );
