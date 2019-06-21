@@ -13,3 +13,33 @@
    U - updateSmurf
    D - deleteSmurf
 */
+
+import axios from "axios";
+
+export const ADD_SMURF = "ADD_SMURF";
+export const GET_SMURFS = "GET_SMURFS";
+export const UPDATE_SMURF = "UPDATE_SMURF";
+export const DELETE_SMURF = "DELETE_SMURF";
+export const ACTION_SUCCESS = "ACTION_SUCCESS";
+export const ACTION_FAILURE = "ACTION_FAILURE";
+
+const api = "https://reeiy.sse.codesandbox.io";
+
+export const addSmurf = smurf => dispatch => {
+  dispatch({ type: ADD_SMURF });
+};
+
+export const getSmurfs = () => dispatch => {
+  dispatch({ type: GET_SMURFS });
+  return axios
+    .get(`${api}/smurfs`)
+    .then(res => {
+      console.log(res);
+      setTimeout(() => {
+        dispatch({ type: ACTION_SUCCESS, payload: res.data });
+      }, 2000);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
