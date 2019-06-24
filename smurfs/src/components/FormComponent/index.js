@@ -34,7 +34,6 @@ const SmurfForm = (props) => {
           props.history.push("/")
         }
       });
-      return;
     }
     props.addSmurf(smurf).then(res => {
       if(res)
